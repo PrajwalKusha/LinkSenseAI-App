@@ -162,8 +162,9 @@ function App() {
 
     const header = isCondensed ? '📝 Quick Summary:' : '📝 Key Takeaways:';
     
-    // Create shortened URL for the original article using query parameter
-    const originalShortUrl = `${result.shortUrl}?redirect=true`;
+    // Create URLs for both summary and original article
+    const summaryUrl = result.shortUrl;
+    const originalUrl = result.originalUrl;
     
     return `📄 ${result.title || 'Article Summary'}
 
@@ -171,8 +172,8 @@ ${header}
 
 ${summaryText}
 
-🔗 Read full summary: ${result.shortUrl}
-📖 Read original article: ${originalShortUrl}
+🔗 Read full summary: ${summaryUrl}
+📖 Read original article: ${originalUrl}
 
 ---
 Powered by LinkSense AI ✨`;
@@ -265,7 +266,7 @@ Powered by LinkSense AI ✨`;
                         className="short-url-input"
                       />
                       <a
-                        href={`/${summaryData.shortCode}?redirect=true`}
+                        href={summaryData.originalUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="external-btn"
