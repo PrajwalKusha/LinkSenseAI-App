@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from './api';
 import { Link, Loader2, Sparkles, Copy, ExternalLink, CheckCircle, X, ArrowLeft } from 'lucide-react';
 import './App.css';
 
@@ -29,7 +29,7 @@ function App() {
 
   const fetchSummaryData = async (shortCode) => {
     try {
-      const response = await axios.get(`/api/summary/${shortCode}`);
+      const response = await api.get(`/api/summary/${shortCode}`);
       setSummaryData(response.data);
     } catch (error) {
       console.error('Failed to fetch summary:', error);
@@ -58,7 +58,7 @@ function App() {
     setResult(null);
 
     try {
-      const response = await axios.post('/api/shorten', { url: url.trim() });
+      const response = await api.post('/api/shorten', { url: url.trim() });
       setResult(response.data);
       setUrl(''); // Clear input after successful submission
     } catch (error) {
@@ -107,7 +107,7 @@ function App() {
         // Generate condensed summary using AI
         setIsGeneratingCondensed(true);
         console.log('Generating condensed summary...');
-        const condensedResponse = await axios.post('/api/condensed-summary', {
+        const condensedResponse = await api.post('/api/condensed-summary', {
           summary: result.summary,
           title: result.title
         });
