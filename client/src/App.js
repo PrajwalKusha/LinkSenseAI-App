@@ -164,8 +164,8 @@ function App() {
     
     // Create URLs for both summary and original article
     const summaryUrl = result.shortUrl;
-    // Create shortened URL for the original article using redirect path
-    const shortOriginalUrl = `${result.shortUrl.replace(/\/([A-Za-z0-9_-]{6})$/, '/redirect/$1')}`;
+    // Use the original URL directly for reading the full article
+    const originalUrl = result.originalUrl;
     
     return `📄 ${result.title || 'Article Summary'}
 
@@ -174,7 +174,7 @@ ${header}
 ${summaryText}
 
 🔗 Read full summary: ${summaryUrl}
-📖 Read original article: ${shortOriginalUrl}
+📖 Read original article: ${originalUrl}
 
 ---
 Powered by LinkSense AI ✨`;
@@ -272,30 +272,30 @@ Powered by LinkSense AI ✨`;
                         </div>
                       </div>
                       <div className="url-row">
-                        <span className="url-label">Shortened URL:</span>
+                        <span className="url-label">Direct Link:</span>
                         <div className="url-display">
                           <input
                             type="text"
-                            value={`${window.location.origin}/redirect${window.location.pathname}`}
+                            value={summaryData.originalUrl}
                             readOnly
                             className="short-url-input"
                           />
                           <button 
                             onClick={async () => {
                               try {
-                                await navigator.clipboard.writeText(`${window.location.origin}/redirect${window.location.pathname}`);
+                                await navigator.clipboard.writeText(summaryData.originalUrl);
                                 // You could add a temporary "Copied!" message here
                               } catch (error) {
                                 console.error('Failed to copy:', error);
                               }
                             }}
                             className="copy-btn"
-                            title="Copy shortened URL"
+                            title="Copy original URL"
                           >
                             <Copy size={18} />
                           </button>
                           <a
-                            href={`/redirect${window.location.pathname}`}
+                            href={summaryData.originalUrl}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="external-btn"

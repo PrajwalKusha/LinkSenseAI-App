@@ -6,10 +6,6 @@
       "dest": "https://linksenseai-app.onrender.com/api/$1"
     },
     {
-      "src": "/redirect/([A-Za-z0-9_-]{6})",
-      "dest": "https://linksenseai-app.onrender.com/redirect/$1"
-    },
-    {
       "src": "/([A-Za-z0-9_-]{6})",
       "dest": "/index.html"
     },
