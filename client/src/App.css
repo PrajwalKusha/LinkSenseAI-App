@@ -411,10 +411,8 @@ body {
   padding: 0;
   border: 1px solid rgba(148, 163, 184, 0.2);
   backdrop-filter: blur(20px);
+  overflow: hidden;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
 }
 
 .summary-content::before {
@@ -453,9 +451,6 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0;
-  flex: 1;
-  min-height: 0;
-  overflow: visible;
 }
 
 .summary-point {
@@ -467,9 +462,7 @@ body {
   position: relative;
   backdrop-filter: blur(10px);
   transition: all 0.4s ease;
-  overflow: visible;
-  height: auto;
-  min-height: 0;
+  overflow: hidden;
 }
 
 .summary-point:first-child {
