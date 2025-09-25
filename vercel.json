@@ -1,8 +1,7 @@
 {
-  "version": 2,
-  "routes": [
-    { "src": "/api/(.*)", "dest": "https://linksenseai-app.onrender.com/api/$1" },
-    { "src": "/([A-Za-z0-9_-]{6})", "dest": "https://linksenseai-app.onrender.com/$1" },
-    { "src": "/(.*)", "dest": "/client/build/$1" }
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://linksenseai-app.onrender.com/api/:path*" },
+    { "source": "/:shortCode(^[A-Za-z0-9_-]{6}$)", "destination": "https://linksenseai-app.onrender.com/:shortCode" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
