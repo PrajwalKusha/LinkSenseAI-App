@@ -428,6 +428,11 @@ app.get('/redirect/:shortCode', async (req, res) => {
   try {
     const { shortCode } = req.params;
 
+    // Validate short code format
+    if (!/^[A-Za-z0-9_-]{6}$/.test(shortCode)) {
+      return res.status(404).send('Invalid short code format');
+    }
+
     // Look up URL in database
     const { data, error } = await supabase
       .from('shortened_urls')
@@ -436,6 +441,7 @@ app.get('/redirect/:shortCode', async (req, res) => {
       .single();
 
     if (error || !data) {
+      console.log(`Short code not found: ${shortCode}`);
       return res.status(404).send('Short URL not found');
     }
 

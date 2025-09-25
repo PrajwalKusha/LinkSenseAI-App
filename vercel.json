@@ -6,18 +6,11 @@
       "dest": "https://linksenseai-app.onrender.com/api/$1"
     },
     {
-      "src": "/([A-Za-z0-9_-]{6})",
+      "src": "/redirect/([A-Za-z0-9_-]{6})",
       "status": 308,
       "headers": {
-        "Location": "https://linksenseai-app.onrender.com/$1?redirect=true"
-      },
-      "has": [
-        {
-          "type": "query",
-          "key": "redirect",
-          "value": "true"
-        }
-      ]
+        "Location": "https://linksenseai-app.onrender.com/redirect/$1"
+      }
     },
     {
       "src": "/([A-Za-z0-9_-]{6})",

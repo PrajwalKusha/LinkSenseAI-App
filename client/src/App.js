@@ -164,8 +164,8 @@ function App() {
     
     // Create URLs for both summary and original article
     const summaryUrl = result.shortUrl;
-    // Create shortened URL for the original article using redirect parameter
-    const shortOriginalUrl = `${result.shortUrl}?redirect=true`;
+    // Create shortened URL for the original article using redirect path
+    const shortOriginalUrl = `${result.shortUrl.replace(/\/([A-Za-z0-9_-]{6})$/, '/redirect/$1')}`;
     
     return `📄 ${result.title || 'Article Summary'}
 
@@ -276,14 +276,14 @@ Powered by LinkSense AI ✨`;
                         <div className="url-display">
                           <input
                             type="text"
-                            value={`${window.location.origin}${window.location.pathname}?redirect=true`}
+                            value={`${window.location.origin}/redirect${window.location.pathname}`}
                             readOnly
                             className="short-url-input"
                           />
                           <button 
                             onClick={async () => {
                               try {
-                                await navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?redirect=true`);
+                                await navigator.clipboard.writeText(`${window.location.origin}/redirect${window.location.pathname}`);
                                 // You could add a temporary "Copied!" message here
                               } catch (error) {
                                 console.error('Failed to copy:', error);
@@ -295,7 +295,7 @@ Powered by LinkSense AI ✨`;
                             <Copy size={18} />
                           </button>
                           <a
-                            href={`${window.location.pathname}?redirect=true`}
+                            href={`/redirect${window.location.pathname}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="external-btn"
