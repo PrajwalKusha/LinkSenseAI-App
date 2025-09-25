@@ -49,8 +49,7 @@ function getBaseUrl(req) {
   return `${proto}://${host}`;
 }
 
-// Serve static files from client build
-app.use(express.static(path.join(__dirname, 'client/build')));
+// No static file serving needed - handled by Vercel
 
 // Utility function to validate URL
 function isValidUrl(string) {
@@ -310,7 +309,7 @@ app.post('/api/shorten', async (req, res) => {
   }
 });
 
-// Summary display endpoint - shows our summary page or redirects based on query param
+// Shortcode endpoint - handles redirections and returns summary data
 app.get('/:shortCode', async (req, res) => {
   try {
     const { shortCode } = req.params;
@@ -318,7 +317,7 @@ app.get('/:shortCode', async (req, res) => {
 
     // Validate short code format
     if (!/^[A-Za-z0-9_-]{6}$/.test(shortCode)) {
-      return res.status(404).send('Invalid short code format');
+      return res.status(404).json({ error: 'Invalid short code format' });
     }
 
     // Look up URL in database
@@ -330,23 +329,35 @@ app.get('/:shortCode', async (req, res) => {
 
     if (error || !data) {
       console.log(`Short code not found: ${shortCode}`);
-      return res.status(404).send('Short URL not found');
+      return res.status(404).json({ error: 'Short URL not found' });
     }
 
     // If redirect parameter is present, redirect to original URL
     if (redirect === 'true') {
       console.log(`Redirecting ${shortCode} to ${data.original_url}`);
+      // Set CORS headers before redirecting
+      res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+      res.header('Access-Control-Allow-Headers', 'Content-Type');
+      
+      // Send redirect response
       res.redirect(301, data.original_url);
       return;
     }
 
-    // Otherwise, serve the React app with the summary data
-    console.log(`Displaying summary page for ${shortCode}`);
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+    // Otherwise, return the summary data as JSON
+    console.log(`Returning summary data for ${shortCode}`);
+    res.json({
+      shortCode: data.id,
+      originalUrl: data.original_url,
+      summary: data.summary,
+      title: data.title,
+      createdAt: data.created_at
+    });
 
   } catch (error) {
-    console.error('Summary display error:', error);
-    res.status(500).send('Server error');
+    console.error('Shortcode endpoint error:', error);
+    res.status(500).json({ error: 'Server error' });
   }
 });
 
@@ -443,10 +454,7 @@ app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
-// Serve React app for all other routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// No catch-all route needed - handled by Vercel
 
 // Error handling middleware
 app.use((error, req, res, next) => {
