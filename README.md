@@ -2,6 +2,8 @@
 
 A modern, intelligent URL shortener with AI-powered content summarization. Built with React, Node.js, Express, and integrated with Supabase and OpenRouter's Grok AI model.
 
+<img width="2563" height="1352" alt="Screenshot 2025-09-25 at 3 22 00 PM" src="https://github.com/user-attachments/assets/0de00769-5f4e-47c5-a13f-634f46b7bce8" />
+
 ## Features
 
 - 🔗 **URL Shortening**: Generate short, memorable URLs
@@ -10,6 +12,9 @@ A modern, intelligent URL shortener with AI-powered content summarization. Built
 - ⚡ **Fast & Reliable**: Built with modern web technologies
 - 🔒 **Secure**: Rate limiting and input validation
 - 📊 **Analytics Ready**: Click tracking capabilities
+
+<img width="2555" height="1351" alt="Screenshot 2025-09-25 at 3 21 30 PM" src="https://github.com/user-attachments/assets/c0489381-fa34-44a6-be79-4f813f1c0a7a" />
+<img width="2558" height="1354" alt="Screenshot 2025-09-25 at 3 21 42 PM" src="https://github.com/user-attachments/assets/39a121c0-8ad1-44d6-8c78-df566d604a9e" />
 
 ## Tech Stack
 
