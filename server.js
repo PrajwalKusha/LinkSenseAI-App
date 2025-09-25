@@ -17,7 +17,13 @@ const supabase = createClient(config.supabase.url, config.supabase.anonKey);
 
 // Middleware
 app.use(helmet());
-app.use(cors());
+// Configure CORS
+app.use(cors({
+  origin: ['https://link-sense-ai-app.vercel.app', 'http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
+  credentials: false
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
