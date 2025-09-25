@@ -1,6 +1,6 @@
 # LinkSense AI
 
-A modern, intelligent URL shortener with AI-powered content summarization. Built with React, Node.js, Express, and integrated with Supabase and OpenRouter's Grok AI model.
+A modern, intelligent URL shortener with AI-powered content summarization. Built with React, Node.js, Express, and integrated with Supabase and Grok AI model.
 
 <img width="2563" height="1352" alt="Screenshot 2025-09-25 at 3 22 00 PM" src="https://github.com/user-attachments/assets/0de00769-5f4e-47c5-a13f-634f46b7bce8" />
 
