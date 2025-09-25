@@ -1,8 +1,18 @@
 {
   "version": 2,
+  "builds": [
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "build"
+      }
+    }
+  ],
   "routes": [
     { "src": "/api/(.*)", "dest": "https://linksenseai-app.onrender.com/api/$1" },
     { "src": "/([A-Za-z0-9_-]{6})", "dest": "https://linksenseai-app.onrender.com/$1" },
-    { "src": "/(.*)", "dest": "/client/build/$1" }
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
