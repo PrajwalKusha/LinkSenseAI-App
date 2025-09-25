@@ -164,7 +164,8 @@ function App() {
     
     // Create URLs for both summary and original article
     const summaryUrl = result.shortUrl;
-    const originalUrl = result.originalUrl;
+    // Create shortened URL for the original article using redirect parameter
+    const shortOriginalUrl = `${result.shortUrl}?redirect=true`;
     
     return `📄 ${result.title || 'Article Summary'}
 
@@ -173,7 +174,7 @@ ${header}
 ${summaryText}
 
 🔗 Read full summary: ${summaryUrl}
-📖 Read original article: ${originalUrl}
+📖 Read original article: ${shortOriginalUrl}
 
 ---
 Powered by LinkSense AI ✨`;
@@ -257,23 +258,53 @@ Powered by LinkSense AI ✨`;
 
                   {/* Original URL Link */}
                   <div className="original-url-section">
-                    <label>Read Original Article:</label>
-                    <div className="url-display">
-                      <input
-                        type="text"
-                        value={summaryData.originalUrl}
-                        readOnly
-                        className="short-url-input"
-                      />
-                      <a
-                        href={summaryData.originalUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="external-btn"
-                        title="Open original article"
-                      >
-                        <ExternalLink size={18} />
-                      </a>
+                    <label>Original Article:</label>
+                    <div className="url-info">
+                      <div className="url-row">
+                        <span className="url-label">Original URL:</span>
+                        <div className="url-display">
+                          <input
+                            type="text"
+                            value={summaryData.originalUrl}
+                            readOnly
+                            className="short-url-input"
+                          />
+                        </div>
+                      </div>
+                      <div className="url-row">
+                        <span className="url-label">Shortened URL:</span>
+                        <div className="url-display">
+                          <input
+                            type="text"
+                            value={`${window.location.origin}${window.location.pathname}?redirect=true`}
+                            readOnly
+                            className="short-url-input"
+                          />
+                          <button 
+                            onClick={async () => {
+                              try {
+                                await navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?redirect=true`);
+                                // You could add a temporary "Copied!" message here
+                              } catch (error) {
+                                console.error('Failed to copy:', error);
+                              }
+                            }}
+                            className="copy-btn"
+                            title="Copy shortened URL"
+                          >
+                            <Copy size={18} />
+                          </button>
+                          <a
+                            href={`${window.location.pathname}?redirect=true`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="external-btn"
+                            title="Open original article"
+                          >
+                            <ExternalLink size={18} />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
 

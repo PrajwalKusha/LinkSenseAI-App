@@ -326,6 +326,24 @@ body {
   gap: 8px;
 }
 
+.url-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.url-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.url-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 500;
+}
+
 .url-display {
   display: flex;
   gap: 12px;
