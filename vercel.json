@@ -7,10 +7,7 @@
     },
     {
       "src": "/redirect/([A-Za-z0-9_-]{6})",
-      "status": 308,
-      "headers": {
-        "Location": "https://linksenseai-app.onrender.com/redirect/$1"
-      }
+      "dest": "https://linksenseai-app.onrender.com/redirect/$1"
     },
     {
       "src": "/([A-Za-z0-9_-]{6})",
