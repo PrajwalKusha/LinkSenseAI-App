@@ -1,18 +1,7 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "https://linksenseai-app.onrender.com/api/$1" },
-    { "src": "/([A-Za-z0-9_-]{6})", "dest": "https://linksenseai-app.onrender.com/$1" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://linksenseai-app.onrender.com/api/:path*" },
+    { "source": "/:shortCode(^[A-Za-z0-9_-]{6}$)", "destination": "https://linksenseai-app.onrender.com/:shortCode" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
