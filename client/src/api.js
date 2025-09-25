@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const baseURL = process.env.NODE_ENV === 'production'
-  ? 'https://linksenseai-app.onrender.com'
-  : 'http://localhost:3001';
+// Always use the Render backend URL in production
+const baseURL = 'https://linksenseai-app.onrender.com';
 
 const api = axios.create({
   baseURL,

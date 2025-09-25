@@ -17,13 +17,11 @@ const supabase = createClient(config.supabase.url, config.supabase.anonKey);
 
 // Middleware
 app.use(helmet());
-// Configure CORS
-app.use(cors({
-  origin: ['https://link-sense-ai-app.vercel.app', 'http://localhost:3000'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept'],
-  credentials: false
-}));
+// Enable CORS for all origins
+app.use(cors());
+
+// Handle OPTIONS requests
+app.options('*', cors());
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true }));
 
@@ -216,6 +214,11 @@ Article text: ${articleText.substring(0, 6000)}`;
 function generateShortCode() {
   return nanoid(6); // Generate 6-character random string
 }
+
+// Pre-flight route handler
+app.options('/api/shorten', (req, res) => {
+  res.status(200).end();
+});
 
 // API endpoint to shorten URL and generate summary
 app.post('/api/shorten', async (req, res) => {
