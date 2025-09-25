@@ -3,7 +3,9 @@
     {
       "source": "/api/:path*",
       "destination": "https://linksenseai-app.onrender.com/api/:path*"
-    },
+    }
+  ],
+  "redirects": [
     {
       "source": "/:shortCode([A-Za-z0-9_-]{6})",
       "has": [
@@ -13,15 +15,19 @@
           "value": "true"
         }
       ],
-      "destination": "https://linksenseai-app.onrender.com/:shortCode?redirect=true"
+      "destination": "https://linksenseai-app.onrender.com/:shortCode?redirect=true",
+      "permanent": true
+    }
+  ],
+  "routes": [
+    { "handle": "filesystem" },
+    {
+      "src": "/:shortCode([A-Za-z0-9_-]{6})",
+      "dest": "/index.html"
     },
     {
-      "source": "/:shortCode([A-Za-z0-9_-]{6})",
-      "destination": "https://linksenseai-app.onrender.com/:shortCode"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
