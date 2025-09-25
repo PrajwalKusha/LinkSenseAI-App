@@ -185,7 +185,7 @@ Article text: ${articleText.substring(0, 6000)}`;
             content: prompt
           }
         ],
-        max_tokens: 400,
+        max_tokens: 1000,
         temperature: 0.3
       },
       {
