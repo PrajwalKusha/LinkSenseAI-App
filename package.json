@@ -1,0 +1,35 @@
+{
+  "name": "linksense-ai",
+  "version": "1.0.0",
+  "description": "URL shortener with AI-powered content summarization",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node start-dev.js",
+    "server": "nodemon server.js",
+    "build": "npm run build:client",
+    "build:client": "cd client && npm run build"
+  },
+  "keywords": [
+    "url-shortener",
+    "ai",
+    "summarization",
+    "web-scraping"
+  ],
+  "author": "LinkSense AI",
+  "license": "MIT",
+  "dependencies": {
+    "@extractus/article-extractor": "^8.0.7",
+    "@supabase/supabase-js": "^2.38.4",
+    "axios": "^1.6.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "nanoid": "^3.3.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

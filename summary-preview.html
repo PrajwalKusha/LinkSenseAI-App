@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkSense AI - New Summary Design Preview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a855f7, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.1rem;
+        }
+
+        .summary-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .summary-section label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 12px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .summary-content {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 20px;
+            padding: 0;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            backdrop-filter: blur(20px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .summary-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(148, 163, 184, 0.4), transparent);
+        }
+
+        .article-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0 0 2rem 0;
+            line-height: 1.3;
+            text-align: center;
+            padding: 2rem 2rem 0 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        .summary-points-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .summary-point {
+            margin: 0;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            line-height: 1.6;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .summary-point:first-child {
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .summary-point:last-child {
+            border-bottom-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            border-bottom: none;
+        }
+
+        .summary-point:hover {
+            background: rgba(96, 165, 250, 0.08);
+            transform: scale(1.01);
+            z-index: 2;
+            box-shadow: 0 10px 40px rgba(96, 165, 250, 0.15);
+        }
+
+        .summary-point::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+            transition: width 0.4s ease;
+        }
+
+        .summary-point:hover::before {
+            width: 8px;
+        }
+
+        .summary-point-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .summary-point-number {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+
+        .summary-point strong {
+            color: #f8fafc;
+            font-weight: 700;
+            font-size: 1.1rem;
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+            flex: 1;
+            margin: 0;
+        }
+
+        .summary-point-content {
+            color: rgba(203, 213, 225, 0.9);
+            font-size: 15px;
+            line-height: 1.6;
+            margin-left: 3rem;
+            text-align: justify;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .summary-point {
+            animation: slideInUp 0.6s ease forwards;
+        }
+
+        .summary-point:nth-child(1) { animation-delay: 0.1s; }
+        .summary-point:nth-child(2) { animation-delay: 0.2s; }
+        .summary-point:nth-child(3) { animation-delay: 0.3s; }
+        .summary-point:nth-child(4) { animation-delay: 0.4s; }
+        .summary-point:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎨 New Summary Design</h1>
+            <p>Beautiful card-based layout with numbered points and smooth animations</p>
+        </div>
+
+        <div class="summary-section">
+            <label>
+                ✨ AI-Generated Summary:
+            </label>
+            <div class="summary-content">
+                <h3 class="article-title">I Gave 2 Hours Daily to DSA & System Design, Best Decision Ever</h3>
+                <div class="summary-points-container">
+                    <div class="summary-point">
+                        <div class="summary-point-header">
+                            <div class="summary-point-number">1</div>
+                            <strong>Motivation for Starting the Challenge</strong>
+                        </div>
+                        <div class="summary-point-content">
+                            The author, a backend developer with 1.5 years of experience, felt inadequate in interviews, meetings, and daily tasks, such as explaining APIs or scalable designs, leading to faked confidence and secret Googling; to overcome this, he committed to 2 hours daily for 30 days focused on DSA & System Design, emphasizing that consistency trumps courses or luck for skill-building.
+                        </div>
+                    </div>
+
+                    <div class="summary-point">
+                        <div class="summary-point-header">
+                            <div class="summary-point-number">2</div>
+                            <strong>Simple Daily Commitment Rule</strong>
+                        </div>
+                        <div class="summary-point-content">
+                            Adopt a no-excuses routine of 1 hour on DSA (e.g., solving LeetCode problems) and 1 hour on System Design (e.g., learning concepts like rate limiting), without rigid targets or pressure, prioritizing habit formation through daily showing up to foster gradual improvement.
+                        </div>
+                    </div>
+
+                    <div class="summary-point">
+                        <div class="summary-point-header">
+                            <div class="summary-point-number">3</div>
+                            <strong>Week 1 Struggles and Habit Building</strong>
+                        </div>
+                        <div class="summary-point-content">
+                            Initial sessions were tough, with easy DSA problems taking 40 minutes and System Design concepts like Token Bucket feeling overwhelming, but persisting by noting partial understandings (even 20%) in personal words helped establish the habit, reminding that the goal is growth, not perfection.
+                        </div>
+                    </div>
+
+                    <div class="summary-point">
+                        <div class="summary-point-header">
+                            <div class="summary-point-number">4</div>
+                            <strong>Week 2 Small Wins and Pattern Recognition</strong>
+                        </div>
+                        <div class="summary-point-content">
+                            By day 10, daily practice led to quicker problem-solving (e.g., prefix sums in 20 minutes) and recognizing patterns like sliding windows in DSA, while grasping System Design ideas like message queues for async processing (e.g., Kafka in payment systems), shifting mindset from "I've seen this" to "I understand this" for a confidence boost.
+                        </div>
+                    </div>
+
+                    <div class="summary-point">
+                        <div class="summary-point-header">
+                            <div class="summary-point-number">5</div>
+                            <strong>Week 3 Ritual Formation and Enjoyment</strong>
+                        </div>
+                        <div class="summary-point-content">
+                            The practice evolved into a rewarding ritual, becoming the favorite part of the day with focused sessions on topics like gRPC vs. REST or designing systems for apps like WhatsApp, free from distractions, reigniting the joy of learning without external motivation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

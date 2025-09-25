@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkSense AI - Formatting Preview</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-content {
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            border: 1px solid #e6e9ff;
+        }
+        
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 0 0 1rem 0;
+            line-height: 1.4;
+        }
+        
+        .summary-text {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #4a5568;
+            margin: 0;
+        }
+        
+        .summary-point {
+            margin-bottom: 20px;
+            padding: 12px 16px;
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 3px solid #667eea;
+            border-radius: 0 8px 8px 0;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .summary-point:last-child {
+            margin-bottom: 0;
+        }
+        
+        .summary-point strong {
+            color: #667eea;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 4px;
+        }
+        
+        /* Style the bullet point */
+        .summary-point::before {
+            content: "•";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+            position: absolute;
+            left: -8px;
+            top: 12px;
+            background: white;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 LinkSense AI - Improved Formatting Preview</h1>
+            <p>Here's how your bullet-point summaries will look:</p>
+        </div>
+        
+        <div class="summary-content">
+            <h3 class="article-title">Compiling Python to Run Anywhere</h3>
+            <div class="summary-text">
+                <div class="summary-point">
+                    <strong>Python's Portability Revolution via Compilation</strong>: The article introduces a novel compiler that transforms unmodified Python code into ahead-of-time, cross-platform machine code executables, enabling seamless deployment on servers, desktops, mobiles, and web without needing a Python interpreter, achieving near-C/C++ performance levels.
+                </div>
+                
+                <div class="summary-point">
+                    <strong>Overcoming Python's Performance Limitations</strong>: Python's simplicity, while beloved, causes significant slowdowns for intensive workloads like AI; this approach addresses it by generating optimized kernels from standard Python source, bypassing traditional JITs or language rewrites like Numba, PyTorch, or Mojo.
+                </div>
+                
+                <div class="summary-point">
+                    <strong>Flaws in Container-Based AI Distribution</strong>: Containers, which bundle full Linux environments including interpreters and dependencies, are inefficient for AI inference, leading to bloated deployments; the compiler offers a lean alternative by creating self-contained, lightweight executables that reduce overhead and simplify sharing.
+                </div>
+                
+                <div class="summary-point">
+                    <strong>Author's Journey from AI Challenges to Innovation</strong>: Stemming from 2018 deep learning experiences in automated image editing with GANs, the founder of Muna identified distribution bottlenecks after a proptech startup acquisition, inspiring a focus on easy-to-deploy AI models without Docker or third-party services.
+                </div>
+                
+                <div class="summary-point">
+                    <strong>Actionable Takeaway for Developers</strong>: For AI and performance-critical Python projects, prioritize tools like this compiler to enable broad device compatibility and minimal runtime needs; explore Muna.ai to test compiling functions, serving thousands of devices monthly and unlocking scalable, interpreter-free applications.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

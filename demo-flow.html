@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkSense AI - Complete Flow Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
+            color: #fff;
+            padding: 2rem;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #a855f7, #ec4899);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #60a5fa, #a855f7);
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .step-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            color: #60a5fa;
+            overflow-x: auto;
+        }
+
+        .highlight {
+            background: rgba(96, 165, 250, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .improvements {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .improvements h3 {
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        .improvements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .improvements li {
+            padding: 0.5rem 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .improvements li::before {
+            content: "✅ ";
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 LinkSense AI - Complete Flow</h1>
+            <p style="color: rgba(255, 255, 255, 0.7); font-size: 1.1rem;">
+                How the new summary page and condensed AI features work
+            </p>
+        </div>
+
+        <div class="flow-steps">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">User Creates Summary</h3>
+                <p class="step-description">
+                    User enters a URL and gets a shortened link with AI summary
+                </p>
+                <div class="code-block">
+                    POST /api/shorten<br>
+                    → Returns: http://localhost:3001/abc123
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Link Shared & Clicked</h3>
+                <p class="step-description">
+                    When someone clicks the shortened URL, they see our <span class="highlight">beautiful summary page</span> instead of being redirected to the original article
+                </p>
+                <div class="code-block">
+                    GET /abc123<br>
+                    → Shows: LinkSense AI summary page
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Summary Page Display</h3>
+                <p class="step-description">
+                    Beautiful summary page with numbered points, original article link, and sharing options
+                </p>
+                <div class="code-block">
+                    GET /api/summary/abc123<br>
+                    → Returns: Full summary data
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Copy Options Dialog</h3>
+                <p class="step-description">
+                    Users can choose between <span class="highlight">Full Content</span> or <span class="highlight">AI-Condensed</span> version for sharing
+                </p>
+                <div class="code-block">
+                    Full: Complete summary<br>
+                    Condensed: AI-generated short version
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h3 class="step-title">AI Condensed Summary</h3>
+                <p class="step-description">
+                    AI creates a <span class="highlight">proper condensed version</span> with 3-4 short, meaningful points perfect for social sharing
+                </p>
+                <div class="code-block">
+                    POST /api/condensed-summary<br>
+                    → AI generates: Short, engaging bullets
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">6</div>
+                <h3 class="step-title">Traffic to LinkSense</h3>
+                <p class="step-description">
+                    Shared content includes <span class="highlight">LinkSense URL</span> to drive traffic back to our platform, promoting our summarization service
+                </p>
+                <div class="code-block">
+                    🔗 Read full summary: linksensei.com/abc123<br>
+                    ---<br>
+                    Powered by LinkSense AI ✨
+                </div>
+            </div>
+        </div>
+
+        <div class="improvements">
+            <h3>🎯 Key Improvements Implemented</h3>
+            <ul>
+                <li><strong>Summary Page Route:</strong> /shortCode now shows our summary instead of redirecting</li>
+                <li><strong>Separate Redirect:</strong> /redirect/shortCode for direct article access</li>
+                <li><strong>AI-Powered Condensed:</strong> Real AI condensation, not just headings</li>
+                <li><strong>Traffic Generation:</strong> Shared content promotes LinkSense platform</li>
+                <li><strong>Beautiful UI:</strong> Modern summary display with numbered points</li>
+                <li><strong>Smart Sharing:</strong> Two copy options with loading states</li>
+                <li><strong>SEO Friendly:</strong> Each summary gets its own page URL</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem; color: rgba(255, 255, 255, 0.6);">
+            <p>🎉 <strong>Result:</strong> Users see beautiful summaries, share engaging content, and drive traffic back to LinkSense AI!</p>
+        </div>
+    </div>
+</body>
+</html>
